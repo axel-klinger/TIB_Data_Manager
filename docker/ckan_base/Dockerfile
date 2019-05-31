@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:jessie
 MAINTAINER Gabriel Gimenez @ Fraunhofer
 
 RUN apt-get -q -y update && apt-get -q -y upgrade && DEBIAN_FRONTEND=noninteractive apt-get -q -y install \
@@ -37,7 +37,7 @@ RUN ckan-pip install --upgrade -r $CKAN_HOME/src/ckan/dev-requirements.txt
 RUN ckan-pip install --upgrade urllib3
 
 # BUGFIX TRUNCATE
-RUN ckan-pip install Jinja2==2.8 	
+RUN ckan-pip install Jinja2==2.8
 
 # SetUp CKAN
 RUN ckan-pip install -e $CKAN_HOME/src/ckan/
@@ -53,4 +53,3 @@ VOLUME ["/etc/ckan/default"]
 VOLUME ["/var/lib/ckan"]
 EXPOSE 500
 CMD ["ckan-paster","serve","--reload","/etc/ckan/default/ckan.ini"]
-
